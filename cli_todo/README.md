@@ -1,13 +1,39 @@
 # Simple CLI Todo List
 
-This is a very basic command-line tool for managing a todo list.
+This is a simple command-line tool for managing a todo list.
+
+## Features
+
+*   **Add Tasks:** Add tasks to the list.
+*   **List Tasks:** View all tasks in the list.
+*   **Remove Tasks:** Remove tasks from the list by number.
 
 ## Usage
 
-To add tasks, run the script with the task(s) as arguments:
+1.  **Add a task:**
+    ```bash
+    python main.py add task_description
+    ```
+
+2.  **List tasks:**
+    ```bash
+    python main.py list
+    ```
+
+3.  **Remove a task:**
+    ```bash
+    python main.py remove task_number
+    ```
+    Replace `task_number` with the number of the task you want to remove (as displayed when listing tasks).
+
+## Data Storage
+
+Tasks are stored in a JSON file named `todo.json`.
+
+## Testing
+
+Unit tests are included to ensure the functionality of the script.  Run them using:
 
 ```bash
-python main.py task1 task2 task3
+python -m unittest test_main.py
 ```
-
-This will print the list of tasks to the console.
