@@ -51,3 +51,8 @@ python -m unittest test_main.py
 *   **Add a task:** `python main.py add Buy groceries`
 *   **List tasks:** `python main.py list`
 *   **Remove task 1:** `python main.py remove 1`
+
+## New Features
+
+*   **JSON Corruption Handling:** The script now gracefully handles corrupted JSON files in `todo.json` by returning an empty list and printing an informative error message. This prevents the program from crashing when encountering invalid data.
+*   **Comprehensive JSON Error Handling:** Added a test case `test_load_tasks_corrupted_json` to specifically verify the handling of corrupted JSON files.

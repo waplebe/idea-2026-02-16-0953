@@ -78,3 +78,8 @@ class TestMain(unittest.TestCase):
         with open(self.todo_file, "w") as f:
             f.write("This is not valid JSON")
         self.assertEqual(main.load_tasks(), [])
+
+    def test_load_tasks_corrupted_json(self):
+        with open(self.todo_file, "w") as f:
+            f.write("[")  # Incomplete JSON
+        self.assertEqual(main.load_tasks(), [])

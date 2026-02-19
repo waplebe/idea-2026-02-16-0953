@@ -11,6 +11,7 @@ def load_tasks():
             with open(DATA_FILE, "r") as f:
                 return json.load(f)
         except json.JSONDecodeError:
+            print(f"Error: Could not decode JSON from {DATA_FILE}.  File may be corrupted.  Starting with an empty list.")
             return []
     else:
         return []
