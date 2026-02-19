@@ -37,3 +37,17 @@ Unit tests are included to ensure the functionality of the script.  Run them usi
 ```bash
 python -m unittest test_main.py
 ```
+
+## Improvements
+
+*   **Error Handling:**  The script now includes more robust error handling, specifically for invalid task numbers and invalid JSON in the data file.
+*   **Data Validation:**  The `remove_task` function validates the input task number to ensure it's within the valid range of tasks.
+*   **JSONDecodeError Handling:** The `load_tasks` function now handles `JSONDecodeError` gracefully, returning an empty list if the JSON file is corrupted.
+*   **Comprehensive Testing:** Added a test case `test_load_tasks_invalid_json` to verify the script handles invalid JSON in the data file.
+*   **Clearer Error Messages:** Improved error messages to provide more helpful feedback to the user.
+
+## Examples
+
+*   **Add a task:** `python main.py add Buy groceries`
+*   **List tasks:** `python main.py list`
+*   **Remove task 1:** `python main.py remove 1`

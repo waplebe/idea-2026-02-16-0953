@@ -74,5 +74,7 @@ class TestMain(unittest.TestCase):
             tasks = json.load(f)
             self.assertEqual(tasks, ["Task 1"])
 
-if __name__ == '__main__':
-    unittest.main()
+    def test_load_tasks_invalid_json(self):
+        with open(self.todo_file, "w") as f:
+            f.write("This is not valid JSON")
+        self.assertEqual(main.load_tasks(), [])

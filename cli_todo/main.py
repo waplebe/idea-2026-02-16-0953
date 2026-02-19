@@ -7,11 +7,11 @@ DATA_FILE = "todo.json"
 def load_tasks():
     """Loads tasks from the data file."""
     if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, "r") as f:
-            try:
+        try:
+            with open(DATA_FILE, "r") as f:
                 return json.load(f)
-            except json.JSONDecodeError:
-                return []
+        except json.JSONDecodeError:
+            return []
     else:
         return []
 
