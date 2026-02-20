@@ -83,3 +83,14 @@ class TestMain(unittest.TestCase):
         with open(self.todo_file, "w") as f:
             f.write("[")  # Incomplete JSON
         self.assertEqual(main.load_tasks(), [])
+
+    def test_load_tasks_empty_json(self):
+        with open(self.todo_file, "w") as f:
+            json.dump([], f)
+        self.assertEqual(main.load_tasks(), [])
+
+    def test_save_tasks_with_empty_list(self):
+        main.save_tasks([])
+        self.assertTrue(os.path.exists(self.todo_file))
+        with open(self.todo_file, "r") as f:
+            self.assertEqual(json.load(f), [])
