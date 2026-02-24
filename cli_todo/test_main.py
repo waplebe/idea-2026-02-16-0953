@@ -94,3 +94,19 @@ class TestMain(unittest.TestCase):
         self.assertTrue(os.path.exists(self.todo_file))
         with open(self.todo_file, "r") as f:
             self.assertEqual(json.load(f), [])
+
+    def test_add_task_with_spaces(self):
+        main.add_task("Task with spaces")
+        self.assertTrue(os.path.exists(self.todo_file))
+        with open(self.todo_file, "r") as f:
+            tasks = json.load(f)
+            self.assertEqual(tasks, ["Task with spaces"])
+
+    def test_remove_task_with_spaces(self):
+        main.add_task("Task with spaces")
+        main.add_task("Another Task")
+        main.remove_task("1")
+        self.assertTrue(os.path.exists(self.todo_file))
+        with open(self.todo_file, "r") as f:
+            tasks = json.load(f)
+            self.assertEqual(tasks, ["Another Task"])
