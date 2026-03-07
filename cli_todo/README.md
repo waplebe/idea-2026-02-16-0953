@@ -65,5 +65,3 @@ python -m unittest test_main.py
 *   **Command History:**  Implement command history using the `readline` module.
 *   **Configuration File:**  Allow users to customize the application's behavior through a configuration file (e.g., setting the default data file location).
 *   **GUI Interface:**  Create a graphical user interface for the todo list.
-
----

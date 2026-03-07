@@ -110,3 +110,11 @@ class TestMain(unittest.TestCase):
         with open(self.todo_file, "r") as f:
             tasks = json.load(f)
             self.assertEqual(tasks, ["Another Task"])
+
+    def test_remove_task_nonexistent(self):
+        main.add_task("Task 1")
+        main.remove_task("99")
+        self.assertTrue(os.path.exists(self.todo_file))
+        with open(self.todo_file, "r") as f:
+            tasks = json.load(f)
+            self.assertEqual(tasks, ["Task 1"])
