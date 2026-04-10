@@ -118,3 +118,17 @@ class TestMain(unittest.TestCase):
         with open(self.todo_file, "r") as f:
             tasks = json.load(f)
             self.assertEqual(tasks, ["Task 1"])
+
+    def test_load_tasks_invalid_json_multiple_times(self):
+        with open(self.todo_file, "w") as f:
+            f.write("This is not valid JSON")
+        self.assertEqual(main.load_tasks(), [])
+        self.assertEqual(main.load_tasks(), [])
+
+    def test_save_tasks_with_priority(self):
+        tasks = [{"task": "Task 1", "priority": "high"}, {"task": "Task 2", "priority": "low"}]
+        main.save_tasks(tasks)
+        self.assertTrue(os.path.exists(self.todo_file))
+        with open(self.todo_file, "r") as f:
+            loaded_tasks = json.load(f)
+            self.assertEqual(loaded_tasks, tasks)
