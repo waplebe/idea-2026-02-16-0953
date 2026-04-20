@@ -38,7 +38,7 @@ class TestMain(unittest.TestCase):
         self.assertTrue(os.path.exists(self.todo_file))
         with open(self.todo_file, "r") as f:
             tasks = json.load(f)
-            self.assertEqual(tasks, ["New Task"])
+            self.assertEqual(tasks, [{"task": "New Task", "priority": "medium", "completed": False}])
 
     def test_list_tasks(self):
         main.add_task("Task 1")
@@ -47,7 +47,7 @@ class TestMain(unittest.TestCase):
         self.assertTrue(os.path.exists(self.todo_file))
         with open(self.todo_file, "r") as f:
             tasks = json.load(f)
-            self.assertEqual(tasks, ["Task 1", "Task 2"])
+            self.assertEqual(tasks, [{"task": "Task 1", "priority": "medium", "completed": False}, {"task": "Task 2", "priority": "medium", "completed": False}])
 
     def test_remove_task(self):
         main.add_task("Task 1")
@@ -56,7 +56,7 @@ class TestMain(unittest.TestCase):
         self.assertTrue(os.path.exists(self.todo_file))
         with open(self.todo_file, "r") as f:
             tasks = json.load(f)
-            self.assertEqual(tasks, ["Task 2"])
+            self.assertEqual(tasks, [{"task": "Task 2", "priority": "medium", "completed": False}])
 
     def test_remove_task_invalid_number(self):
         main.add_task("Task 1")
@@ -64,7 +64,7 @@ class TestMain(unittest.TestCase):
         self.assertTrue(os.path.exists(self.todo_file))
         with open(self.todo_file, "r") as f:
             tasks = json.load(f)
-            self.assertEqual(tasks, ["Task 1"])
+            self.assertEqual(tasks, [{"task": "Task 1", "priority": "medium", "completed": False}])
 
     def test_remove_task_invalid_input(self):
         main.add_task("Task 1")
@@ -72,7 +72,7 @@ class TestMain(unittest.TestCase):
         self.assertTrue(os.path.exists(self.todo_file))
         with open(self.todo_file, "r") as f:
             tasks = json.load(f)
-            self.assertEqual(tasks, ["Task 1"])
+            self.assertEqual(tasks, [{"task": "Task 1", "priority": "medium", "completed": False}])
 
     def test_load_tasks_invalid_json(self):
         with open(self.todo_file, "w") as f:
@@ -100,7 +100,7 @@ class TestMain(unittest.TestCase):
         self.assertTrue(os.path.exists(self.todo_file))
         with open(self.todo_file, "r") as f:
             tasks = json.load(f)
-            self.assertEqual(tasks, ["Task with spaces"])
+            self.assertEqual(tasks, [{"task": "Task with spaces", "priority": "medium", "completed": False}])
 
     def test_remove_task_with_spaces(self):
         main.add_task("Task with spaces")
@@ -109,7 +109,7 @@ class TestMain(unittest.TestCase):
         self.assertTrue(os.path.exists(self.todo_file))
         with open(self.todo_file, "r") as f:
             tasks = json.load(f)
-            self.assertEqual(tasks, ["Another Task"])
+            self.assertEqual(tasks, [{"task": "Another Task", "priority": "medium", "completed": False}])
 
     def test_remove_task_nonexistent(self):
         main.add_task("Task 1")
@@ -117,7 +117,7 @@ class TestMain(unittest.TestCase):
         self.assertTrue(os.path.exists(self.todo_file))
         with open(self.todo_file, "r") as f:
             tasks = json.load(f)
-            self.assertEqual(tasks, ["Task 1"])
+            self.assertEqual(tasks, [{"task": "Task 1", "priority": "medium", "completed": False}])
 
     def test_load_tasks_invalid_json_multiple_times(self):
         with open(self.todo_file, "w") as f:
@@ -132,3 +132,12 @@ class TestMain(unittest.TestCase):
         with open(self.todo_file, "r") as f:
             loaded_tasks = json.load(f)
             self.assertEqual(loaded_tasks, tasks)
+
+    def test_list_tasks_with_priority(self):
+        main.add_task("Task 1", priority="high")
+        main.add_task("Task 2", priority="low")
+        main.list_tasks()
+        self.assertTrue(os.path.exists(self.todo_file))
+        with open(self.todo_file, "r") as f:
+            tasks = json.load(f)
+            self.assertEqual(tasks, [{"task": "Task 1", "priority": "high", "completed": False}, {"task": "Task 2", "priority": "low", "completed": False}])

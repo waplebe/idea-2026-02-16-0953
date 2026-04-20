@@ -7,6 +7,8 @@ This is a simple command-line tool for managing a todo list.
 *   **Add Tasks:** Add tasks to the list.
 *   **List Tasks:** View all tasks in the list.
 *   **Remove Tasks:** Remove tasks from the list by number.
+*   **Task Priorities:** Tasks can be assigned a priority level (e.g., high, medium, low). The list can be sorted by priority.
+*   **Completion Tracking:** Tasks can be marked as complete. The list can display completed and incomplete tasks separately.
 
 ## Usage
 
@@ -25,6 +27,11 @@ This is a simple command-line tool for managing a todo list.
     python main.py remove task_number
     ```
     Replace `task_number` with the number of the task you want to remove (as displayed when listing tasks).
+
+4.  **View Tasks with Priority:**
+    ```bash
+    python main.py list
+    ```
 
 ## Data Storage
 
@@ -56,12 +63,13 @@ python -m unittest test_main.py
 
 *   **JSON Corruption Handling:** The script now gracefully handles corrupted JSON files in `todo.json` by returning an empty list and printing an informative error message. This prevents the program from crashing when encountering invalid data.
 *   **Comprehensive JSON Error Handling:** Added a test case `test_load_tasks_corrupted_json` to specifically verify the handling of corrupted JSON files.
+*   **Task Priorities:** Tasks can be assigned a priority level (e.g., high, medium, low). The list can be sorted by priority.
+*   **Completion Tracking:** Tasks can be marked as complete. The list can display completed and incomplete tasks separately.
 
 ## Advanced Features
 
-*   **Task Prioritization:**  Tasks can be assigned a priority level (e.g., high, medium, low).  The list can be sorted by priority.
-*   **Due Dates:**  Tasks can have due dates.  The list can be sorted by due date.
-*   **Completion Tracking:**  Tasks can be marked as complete.  The list can display completed and incomplete tasks separately.
 *   **Command History:**  Implement command history using the `readline` module.
 *   **Configuration File:**  Allow users to customize the application's behavior through a configuration file (e.g., setting the default data file location).
 *   **GUI Interface:**  Create a graphical user interface for the todo list.
+
+---

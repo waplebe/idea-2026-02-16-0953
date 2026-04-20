@@ -24,7 +24,7 @@ def save_tasks(tasks):
 def add_task(task):
     """Adds a task to the list."""
     tasks = load_tasks()
-    tasks.append(task)
+    tasks.append({"task": task, "priority": "medium", "completed": False})
     save_tasks(tasks)
     print(f"Task '{task}' added.")
 
@@ -36,7 +36,8 @@ def list_tasks():
         return
     print("Tasks:")
     for i, task in enumerate(tasks):
-        print(f"{i+1}. {task}")
+        status = "[X]" if task["completed"] else "[ ]"
+        print(f"{i+1}. {status} {task['task']} (Priority: {task['priority']})")
 
 def remove_task(task_number):
     """Removes a task by its number."""
@@ -46,7 +47,7 @@ def remove_task(task_number):
         if 0 <= index < len(tasks):
             removed_task = tasks.pop(index)
             save_tasks(tasks)
-            print(f"Task '{removed_task}' removed.")
+            print(f"Task '{removed_task['task']}' removed.")
         else:
             print("Invalid task number.")
     except ValueError:
